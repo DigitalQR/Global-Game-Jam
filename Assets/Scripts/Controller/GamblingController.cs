@@ -115,6 +115,9 @@ public class GamblingController : MonoBehaviour {
 	}
 
 	void adjustIndex(int offset){
+		if(currentPlayerIndex == playerOrder.Length){
+			return;
+		}
 		currentIndex += offset;
 
 		if(currentIndex < 0){

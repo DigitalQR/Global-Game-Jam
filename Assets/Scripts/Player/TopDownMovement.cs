@@ -22,6 +22,6 @@ public class TopDownMovement : MonoBehaviour {
 	}
 
 	void OnBecameInvisible(){
-		gamepad.kill ();
+		GetComponent<RawPlayerController>().kill ();
 	}
 }

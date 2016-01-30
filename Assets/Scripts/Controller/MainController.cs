@@ -18,7 +18,7 @@ public class MainController : MonoBehaviour {
 	public GameObject gamblingGroup;
 
 	void Start(){
-		animationPosition = 350;
+		animationPosition = 250;
 		gamblingGroup.SetActive (false);
 
 		for(int i = 0; i < 4; i++) {
@@ -61,9 +61,6 @@ public class MainController : MonoBehaviour {
 	}
 
 	public void killPlayer(GameObject player){
-		players.Remove (player);
-		Destroy(player);
-
 		if(players.Count == 1){
 			GameObject winningPlayer = (GameObject)players [0];
 			playerImage.sprite = winningPlayer.GetComponent<SpriteRenderer> ().sprite;
@@ -72,6 +69,9 @@ public class MainController : MonoBehaviour {
 
 			Invoke ("MoveWinningTextOffTheScreen", 5);
 		}
+
+		players.Remove (player);
+		Destroy(player);
 	}
 
 	void MoveWinningTextOffTheScreen(){
