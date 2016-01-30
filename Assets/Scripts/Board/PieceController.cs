@@ -28,31 +28,23 @@ public class PieceController : MonoBehaviour {
 			float yaxis = GlobalPlayerManager.GetAxis (playerID, "Vertical");
 
 			if(upOption != null && yaxis > 0){
-				lastTile = currentTile;
 				currentTile = upOption;
 				branch = false;
-				Debug.Log ("Up");
 				return;
 			}
 			if(downOption != null && yaxis < 0){
-				lastTile = currentTile;
 				currentTile = downOption;
 				branch = false;
-				Debug.Log ("D");
 				return;
 			}
 			if(leftOption != null && xaxis < 0){
-				lastTile = currentTile;
 				currentTile = leftOption;
 				branch = false;
-				Debug.Log ("L");
 				return;
 			}
 			if(rightOption != null && xaxis > 0){
-				lastTile = currentTile;
 				currentTile = rightOption;
 				branch = false;
-				Debug.Log ("R");
 				return;
 			}
 			return;
@@ -85,6 +77,7 @@ public class PieceController : MonoBehaviour {
 
 	void Roll(){
 		roll = Random.Range (1, 7);
+		moveFactor = 1;
 		Debug.Log (roll);
 
 		getNextTiles ();
@@ -97,6 +90,7 @@ public class PieceController : MonoBehaviour {
 			lastTile = actualLastTile;
 
 		}else{
+
 			branch = true;
 			upOption = null;
 			downOption = null;
@@ -110,23 +104,20 @@ public class PieceController : MonoBehaviour {
 					if (Mathf.Abs (direction.x) > Mathf.Abs (direction.y)) {
 						if (direction.x < 0) {
 							leftOption = tile;
-							Debug.Log ("L--");
 						} else {
 							rightOption = tile;
-							Debug.Log ("R--");
 						}
 					} else {
 						if (direction.y < 0) {
 							downOption = tile;
-							Debug.Log ("D--");
 						} else {
 							upOption = tile;
-							Debug.Log ("U--");
 						}
 					}
 
 				}
 			}
+			lastTile = currentTile;
 		}
 	}
 
