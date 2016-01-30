@@ -9,7 +9,7 @@ public class MainController : MonoBehaviour {
 	public GameObject playerObject;
 	public Sprite[] playerSprites;
 	private ArrayList players = new ArrayList();
-	public int winnerID = -1;
+	public static int winnerID = -1;
 
 	public Text winnerText;
 	public Text nameText;
@@ -18,7 +18,7 @@ public class MainController : MonoBehaviour {
 	public GameObject gamblingGroup;
 
 	void Start(){
-		animationPosition = winnerText.transform.position.y - 450;
+		animationPosition = 350;
 		gamblingGroup.SetActive (false);
 
 		for(int i = 0; i < 4; i++) {
