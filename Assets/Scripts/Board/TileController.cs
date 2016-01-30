@@ -18,11 +18,11 @@ public class TileController : MonoBehaviour {
 		return tile;
 	}
 
-	int howManyAdjacentTiles(){
+	public int howManyAdjacentTiles(){
 		return nearbyTiles.Length;
 	}
 
-	GameObject[] getAdjacentTiles(){
+	public GameObject[] getAdjacentTiles(){
 		return nearbyTiles;
 	}
 
