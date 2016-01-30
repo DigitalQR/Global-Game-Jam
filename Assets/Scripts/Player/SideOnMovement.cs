@@ -35,4 +35,8 @@ public class SideOnMovement : MonoBehaviour {
 			onGround = true;
 		}
 	}
+
+	void OnBecameInvisible(){
+		GetComponent<RawPlayerController>().kill ();
+	}
 }

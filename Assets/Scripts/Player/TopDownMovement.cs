@@ -20,4 +20,8 @@ public class TopDownMovement : MonoBehaviour {
 			body.velocity = velocity.normalized * speed;
 		}
 	}
+
+	void OnBecameInvisible(){
+		gamepad.kill ();
+	}
 }
