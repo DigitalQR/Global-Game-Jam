@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class ChooseControl : MonoBehaviour {
@@ -94,6 +95,6 @@ public class ChooseControl : MonoBehaviour {
 
 	void stop(){
 		gameObject.SetActive (false);
-		Debug.Log ("Finished");
+		SceneManager.LoadScene ("gameboard");
 	}
 }

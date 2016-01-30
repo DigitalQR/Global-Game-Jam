@@ -18,6 +18,7 @@ public class MainController : MonoBehaviour {
 	public GameObject gamblingGroup;
 
 	void Start(){
+		winnerID = -1;
 		animationPosition = 250;
 		gamblingGroup.SetActive (false);
 

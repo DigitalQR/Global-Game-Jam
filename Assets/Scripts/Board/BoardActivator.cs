@@ -6,7 +6,7 @@ public class BoardActivator : MonoBehaviour {
 	public GameObject board;
 
 	void Start () {
-		GameObject controller = GameObject.FindGameObjectWithTag ("GameController");
+		GameObject controller = GameObject.Find ("BoardGameManager");
 		if (controller == null) {
 			Instantiate (board);
 		} else {

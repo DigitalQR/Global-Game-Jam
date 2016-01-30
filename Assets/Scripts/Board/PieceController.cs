@@ -23,54 +23,58 @@ public class PieceController : MonoBehaviour {
 	}
 
 	void FixedUpdate(){
-		if(branch){
-			float xaxis = GlobalPlayerManager.GetAxis (playerID, "Horizontal");
-			float yaxis = GlobalPlayerManager.GetAxis (playerID, "Vertical");
+		if(playerID == BoardController.getCurrentPlayerID()){
+			if(branch){
+				float xaxis = GlobalPlayerManager.GetAxis (playerID, "Horizontal");
+				float yaxis = GlobalPlayerManager.GetAxis (playerID, "Vertical");
 
-			if(upOption != null && yaxis > 0){
-				currentTile = upOption;
-				branch = false;
-				return;
-			}
-			if(downOption != null && yaxis < 0){
-				currentTile = downOption;
-				branch = false;
-				return;
-			}
-			if(leftOption != null && xaxis < 0){
-				currentTile = leftOption;
-				branch = false;
-				return;
-			}
-			if(rightOption != null && xaxis > 0){
-				currentTile = rightOption;
-				branch = false;
-				return;
-			}
-			return;
-		}
-
-		if(cooldown != 0){
-			cooldown--;
-		}
-
-		if(cooldown == 0 && GlobalPlayerManager.GetButton(playerID, "A")){
-			Roll();
-			cooldown = 7;
-		}
-
-		if(roll != 0){
-			if (moveFactor <= 0) {
-				moveFactor = 1;
-				roll--;
-
-				if(roll != 0){
-					getNextTiles();
+				if(upOption != null && yaxis > 0){
+					currentTile = upOption;
+					branch = false;
+					return;
 				}
+				if(downOption != null && yaxis < 0){
+					currentTile = downOption;
+					branch = false;
+					return;
+				}
+				if(leftOption != null && xaxis < 0){
+					currentTile = leftOption;
+					branch = false;
+					return;
+				}
+				if(rightOption != null && xaxis > 0){
+					currentTile = rightOption;
+					branch = false;
+					return;
+				}
+				return;
+			}
 
-			} else {
-				moveFactor -= 0.07f;
-				transform.position = lastTile.transform.position * (moveFactor) + currentTile.transform.position * (1f - moveFactor);
+			if(cooldown != 0){
+				cooldown--;
+			}
+
+			if(cooldown == 0 && GlobalPlayerManager.GetButton(playerID, "A")){
+				Roll();
+				cooldown = 7;
+			}
+
+			if(roll != 0){
+				if (moveFactor <= 0) {
+					moveFactor = 1;
+					roll--;
+
+					if (roll != 0) {
+						getNextTiles ();
+					} else {
+						BoardController.playerDone ();
+					}
+
+				} else {
+					moveFactor -= 0.07f;
+					transform.position = lastTile.transform.position * (moveFactor) + currentTile.transform.position * (1f - moveFactor);
+				}
 			}
 		}
 	}

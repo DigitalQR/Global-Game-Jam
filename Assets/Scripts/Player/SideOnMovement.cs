@@ -19,6 +19,8 @@ public class SideOnMovement : MonoBehaviour {
 	void FixedUpdate () {
 		float y = body.velocity.y;
 
+		Debug.Log (onGround);
+
 		if(onGround && gamepad.isPressingA())
 		{
 			y = jumpHeight;
@@ -31,7 +33,7 @@ public class SideOnMovement : MonoBehaviour {
 	}
 
 	void OnCollisionEnter2D(Collision2D collision){
-		if(collision.gameObject.transform.position.y < transform.position.y){
+		if(collision.gameObject.transform.position.y + collision.collider.offset.y < transform.position.y){
 			onGround = true;
 		}
 	}

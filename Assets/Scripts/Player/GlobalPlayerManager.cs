@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GlobalPlayerManager{
+public class GlobalPlayerManager : ScriptableObject{
 
 	//Holds the gamepad IDs for each player (-1 implies there is no player)
-	public static int[] playerGamepadID = {0, 2, -1, 3};
+	public static int[] playerGamepadID = {0, 1, 2, -1};
 
 	//Holds each player's powerups
 	public static GameObject[,] playerPowerups = new GameObject[4,4];
