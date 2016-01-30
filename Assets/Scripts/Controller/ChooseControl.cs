@@ -94,6 +94,6 @@ public class ChooseControl : MonoBehaviour {
 
 	void stop(){
 		gameObject.SetActive (false);
-		Debug.Log ("AAAAAA");
+		Debug.Log ("Finished");
 	}
 }
