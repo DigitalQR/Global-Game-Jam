@@ -11,6 +11,7 @@ public class TopDownMovement : MonoBehaviour {
 		gamepad = GetComponent<RawPlayerController>();
 		body = GetComponent<Rigidbody2D> ();
 		body.gravityScale = 0;
+		body.drag = 10;
 	}
 	
 	void FixedUpdate () {

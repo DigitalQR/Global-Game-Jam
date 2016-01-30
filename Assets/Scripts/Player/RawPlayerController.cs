@@ -5,9 +5,10 @@ public class RawPlayerController : MonoBehaviour {
 	//Checks for input of a specific player
 
 	public int playerNumber = -1;
+	public MainController gameController;
 
 	public void kill(){
-		Destroy (gameObject);
+		gameController.killPlayer (gameObject);
 	}
 
 	public float getHorizontalState(){

@@ -13,6 +13,7 @@ public class SideOnMovement : MonoBehaviour {
 		gamepad = GetComponent<RawPlayerController>();
 		body = GetComponent<Rigidbody2D> ();
 		body.gravityScale = 1;
+		body.drag = 0.1f;
 	}
 
 	void FixedUpdate () {

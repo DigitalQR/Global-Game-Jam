@@ -36,8 +36,8 @@ public class StartUpScript : MonoBehaviour {
 			popupText.text = "";
 			
 		}else if (countDownNumber == 0) {
-			headerText.text = "";
-			popupText.text = "GO!";
+			popupText.text = "";
+			headerText.text = "GO!";
 
 			GetComponent<MainController> ().enabled = true;
 
@@ -46,8 +46,8 @@ public class StartUpScript : MonoBehaviour {
 			
 		} else {
 
-			headerText.text = "";
-			popupText.text = "" + countDownNumber;
+			popupText.text = "";
+			headerText.text = "" + countDownNumber;
 			countDownNumber--;
 			Invoke ("CountDown", 1);
 		}
