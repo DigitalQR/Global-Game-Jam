@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class SideScrollCamera : MonoBehaviour {
-    public bool isScrolling = false;
+    public static bool isScrolling = false;
 
     // Use this for initialization
     void Start () {
@@ -13,7 +13,7 @@ public class SideScrollCamera : MonoBehaviour {
 	void Update () {
 	    if (isScrolling = true && GameObject.FindGameObjectsWithTag("Player").Length > 1)
         {
-            Transform.Translate(new Vector3(5 * Time.deltaTime, 0, 0));
+            transform.Translate(new Vector3(5 * Time.deltaTime, 0, 0));
         }
 
     }
