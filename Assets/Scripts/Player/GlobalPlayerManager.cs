@@ -2,12 +2,12 @@
 using System.Collections;
 
 public class GlobalPlayerManager{
-	
+
 	//Holds the gamepad IDs for each player (-1 implies there is no player)
-	public static int[] playerGamepadID = {0, 2, 1, 3};
+	public static int[] playerGamepadID = {0, 2, -1, 3};
 
 	//Holds each player's powerups
-	//public static GameObject[][] playerPowerups = new GameObject[4][4];
+	public static GameObject[,] playerPowerups = new GameObject[4,4];
 
 	//Returns true or false as to whether a player is pressing a certain number
 	public static bool GetButton(int playerNumber, string buttonName){

@@ -57,6 +57,7 @@ public class PieceController : MonoBehaviour {
 
 	void CheckBranch()
 	{
+		/*
 		if (numberof adjacent tiles =3){
 			forkdirection.SetActive(true);
 			if(GlobalPlayerManager.GetButton(playerID, "A"))
@@ -65,6 +66,6 @@ public class PieceController : MonoBehaviour {
 				GoTowardCentre();
 			forkDirection.Setactive(false);
 			checkingBranch=false
-		}
+		}*/
 	}
 }

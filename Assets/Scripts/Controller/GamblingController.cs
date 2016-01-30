@@ -8,6 +8,8 @@ public class GamblingController : MonoBehaviour {
 	public Image[] displayPlayer;
 	public Sprite[] playerSprites;
 
+	public GameObject chooseMenu;
+
 	public Text runeTitle;
 	public Text runeDescription;
 	private GameObject[] runeObject = new GameObject[4];
@@ -17,7 +19,12 @@ public class GamblingController : MonoBehaviour {
 	private int[] playerRunes = {-1,-1,-1,-1};
 	private int[] playerOrder;
 
+	public float animationHeight;
+
 	void Start(){
+		animationHeight = transform.position.y;
+		transform.position += new Vector3 (0, 600, 0);
+
 		Object[] allRuneObject = Resources.LoadAll("Object/Rune");
 
 		for (int i = 0; i < 4; i++) {
@@ -54,8 +61,12 @@ public class GamblingController : MonoBehaviour {
 	int cooldown = 0;
 
 	void FixedUpdate(){
+		transform.position = new Vector3(transform.position.x, transform.position.y * 0.8f + animationHeight * 0.2f, 0);
+
+
 		if(currentPlayerIndex == playerOrder.Length){
 			transform.position = transform.position * 0.8f + new Vector3 (transform.position.x, -700, 0) * 0.2f;
+			Invoke ("goToChoosing", 1);
 			return;
 		}
 
@@ -112,6 +123,16 @@ public class GamblingController : MonoBehaviour {
 
 			cooldown = 7;
 		}
+	}
+
+	void goToChoosing(){
+		GameObject[] runes = new GameObject[4];
+		for(int i = 0; i<playerOrder.Length; i++){
+			runes [playerOrder[i]] = runeObject [playerRunes [playerOrder[i]]];
+		}
+
+		chooseMenu.GetComponent<ChooseControl> ().go(runes);
+		gameObject.SetActive (false);
 	}
 
 	void adjustIndex(int offset){

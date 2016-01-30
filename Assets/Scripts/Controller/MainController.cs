@@ -45,18 +45,13 @@ public class MainController : MonoBehaviour {
 		if(winnerID != -1){
 			Camera.main.GetComponent<Blur>().enabled = true;
 
-			if(gamblingGroup.activeSelf){
-				gamblingGroup.transform.position = new Vector3(gamblingGroup.transform.position.x, gamblingGroup.transform.position.y * 0.8f + animationPosition * 0.2f, 0);
+			nameText.text = "Player " + (winnerID + 1);
 
-			}else{
-				nameText.text = "Player " + (winnerID + 1);
+			if(animationPosition != - 150) 
+				winnerText.transform.position = new Vector3(winnerText.transform.position.x, winnerText.transform.position.y * 0.8f + animationPosition * 0.2f, 0);
+			else
+				winnerText.transform.position = new Vector3(winnerText.transform.position.x, winnerText.transform.position.y * 0.9f + animationPosition * 0.1f, 0);
 
-				if(animationPosition != - 150) 
-					winnerText.transform.position = new Vector3(winnerText.transform.position.x, winnerText.transform.position.y * 0.8f + animationPosition * 0.2f, 0);
-				else
-					winnerText.transform.position = new Vector3(winnerText.transform.position.x, winnerText.transform.position.y * 0.9f + animationPosition * 0.1f, 0);
-				
-			}
 		}
 	}
 
@@ -67,7 +62,7 @@ public class MainController : MonoBehaviour {
 			winnerID = winningPlayer.GetComponent<RawPlayerController>().playerNumber;
 			nameText.text = "Player " + (winnerID + 1);
 
-			Invoke ("MoveWinningTextOffTheScreen", 5);
+			Invoke ("MoveWinningTextOffTheScreen", 3);
 		}
 
 		players.Remove (player);
@@ -80,8 +75,6 @@ public class MainController : MonoBehaviour {
 	}
 
 	void ActivateGamblingSection(){
-		animationPosition = gamblingGroup.transform.position.y;
-		gamblingGroup.transform.position += new Vector3 (0, 600, 0);
 		gamblingGroup.SetActive (true);
 	}
 }
