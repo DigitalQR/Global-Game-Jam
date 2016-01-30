@@ -6,6 +6,10 @@ public class RawPlayerController : MonoBehaviour {
 
 	public int playerNumber = -1;
 
+	public void kill(){
+		Destroy (gameObject);
+	}
+
 	public float getHorizontalState(){
 		return GlobalPlayerManager.GetAxis (playerNumber, "Horizontal");
 	}
