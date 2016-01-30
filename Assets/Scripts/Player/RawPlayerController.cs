@@ -6,6 +6,14 @@ public class RawPlayerController : MonoBehaviour {
 
 	public int playerNumber = -1;
 
+	public float getHorizontalState(){
+		return GlobalPlayerManager.GetAxis (playerNumber, "Horizontal");
+	}
+
+	public float getVerticalState(){
+		return GlobalPlayerManager.GetAxis (playerNumber, "Vertical");
+	}
+
 	public bool isPressingUp(){
 		float value = GlobalPlayerManager.GetAxis(playerNumber, "Vertical");
 		return value == 1;
