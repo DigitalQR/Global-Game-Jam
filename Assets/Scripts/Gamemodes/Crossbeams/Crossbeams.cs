@@ -26,6 +26,9 @@ public class Crossbeams : MonoBehaviour {
 			Instantiate (beam, new Vector3 (Random.Range (-9, 9), 0, 0), Quaternion.AngleAxis(90, Vector3.forward));
 		}
 
-		Invoke ("MakeBeam", frequency *= 0.95f);
+        if (GameObject.FindGameObjectsWithTag("Player").Length > 1)
+        {
+            Invoke("MakeBeam", frequency *= 0.95f);
+        }
 	}
 }
