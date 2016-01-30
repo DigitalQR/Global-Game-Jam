@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class GlobalPlayerManager{
-
+	
 	//Holds the gamepad IDs for each player (-1 implies there is no player)
 	public static int[] playerGamepadID = {3, 2, 0,-1};
 

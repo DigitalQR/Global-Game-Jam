@@ -14,10 +14,12 @@ public class StartUpScript : MonoBehaviour {
 	public string GameModeDescription = " GAMEMODE DESCRIPTION";
 
 	public int displayTime = 2;
+	public GameObject gameModeObject;
 
 	void Start () {
 		Camera.main.GetComponent<Blur> ().enabled = true;
 		GetComponent<MainController> ().enabled = false;
+		if(gameModeObject != null) gameModeObject.SetActive (false);
 
 		headerText.text = GameModeHeader;
 		popupText.text = GameModeDescription;
@@ -40,6 +42,7 @@ public class StartUpScript : MonoBehaviour {
 			headerText.text = "GO!";
 
 			GetComponent<MainController> ().enabled = true;
+			if(gameModeObject != null) gameModeObject.SetActive (true);
 
 			countDownNumber--;
 			Invoke ("CountDown", 1);
