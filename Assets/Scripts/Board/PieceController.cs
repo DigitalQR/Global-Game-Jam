@@ -11,13 +11,14 @@ public class PieceController : MonoBehaviour {
 	int cooldown = 0;
 	int roll = 0;
 	float moveFactor = 0;
+	bool checkingBranch = false;
 
 	void Start(){
 		transform.position = currentTile.transform.position;
 	}
 
 	void FixedUpdate(){
-		if(cooldown != 0){
+		if(cooldown != 0 && checkingBranch == false){
 			cooldown--;
 		}
 
@@ -29,6 +30,8 @@ public class PieceController : MonoBehaviour {
 			GameObject actualLastTile = currentTile;
 			currentTile= currentTile.GetComponent<TileController>().getTileThatIsnt(lastTile);
 			lastTile = actualLastTile;
+			checkingBranch = true;
+
 
 			cooldown = 7;
 		}
@@ -42,6 +45,7 @@ public class PieceController : MonoBehaviour {
 					GameObject actualLastTile = currentTile;
 					currentTile= currentTile.GetComponent<TileController>().getTileThatIsnt(lastTile);
 					lastTile = actualLastTile;
+					checkingBranch = true;
 				}
 
 			} else {
@@ -51,4 +55,16 @@ public class PieceController : MonoBehaviour {
 		}
 	}
 
+	void CheckBranch()
+	{
+		if (numberof adjacent tiles =3){
+			forkdirection.SetActive(true);
+			if(GlobalPlayerManager.GetButton(playerID, "A"))
+			   ContinueAround();
+			else if(GlobalPlayerManager.GetButton(playerID, "B"))
+				GoTowardCentre();
+			forkDirection.Setactive(false);
+			checkingBranch=false
+		}
+	}
 }
