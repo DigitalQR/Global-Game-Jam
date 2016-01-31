@@ -1,9 +1,14 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class PieceController : MonoBehaviour {
 
 	public int playerID;
+	private int visualRoll = 0;
+
+	public Text popupText;
+	public Image diceBackground;
 
 	public GameObject currentTile;
 	public GameObject lastTile;
@@ -57,16 +62,24 @@ public class PieceController : MonoBehaviour {
 
 			if(cooldown == 0 && GlobalPlayerManager.GetButton(playerID, "A")){
 				Roll();
+				visualRoll = roll;
 				cooldown = 7;
+			}else if(roll == 0){
+				popupText.text = "Press A to roll the dice";
+				diceBackground.enabled = false;
 			}
 
 			if(roll != 0){
+				popupText.text = "" + visualRoll;
+				diceBackground.enabled = true;
+
 				if (moveFactor <= 0) {
 					moveFactor = 1;
 					roll--;
 
 					if (roll != 0) {
 						getNextTiles ();
+						visualRoll = roll;
 					} else {
 						BoardController.playerDone ();
 					}

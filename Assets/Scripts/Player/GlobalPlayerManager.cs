@@ -4,7 +4,7 @@ using System.Collections;
 public class GlobalPlayerManager : ScriptableObject{
 
 	//Holds the gamepad IDs for each player (-1 implies there is no player)
-	public static int[] playerGamepadID = {-1, -1, -1, -1};
+	public static int[] playerGamepadID = {0, 0, 0, 0};
 
 	//Holds each player's powerups
 	public static GameObject[,] playerPowerups = new GameObject[4,4];

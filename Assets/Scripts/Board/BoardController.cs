@@ -61,6 +61,7 @@ public class BoardController : MonoBehaviour {
 					player.GetComponent<PieceController> ().currentTile = spawnTiles [i];
 					player.GetComponent<SpriteRenderer> ().sprite = playerSprites [i];
 					playerPictures [i].enabled = true;
+					player.SetActive (true);
 				} else {
 					playerPictures [i].enabled = false;
 				}
@@ -82,6 +83,7 @@ public class BoardController : MonoBehaviour {
 					player.GetComponent<PieceController> ().lastTile = lastTile;
 					player.GetComponent<SpriteRenderer> ().sprite = playerSprites [i];
 					playerPictures [i].enabled = true;
+					player.SetActive (true);
 				} else {
 					playerPictures [i].enabled = false;
 				}
