@@ -14,6 +14,8 @@ public class BoardController : MonoBehaviour {
 
 	public GameObject piece; 
 	public Sprite[] playerSprites;
+	private static Vector3[] playerLocations;
+	private static Vector3[] playerLastLocations;
 
 	static private ArrayList playerList;
 	static private int playerIndex;
@@ -23,6 +25,12 @@ public class BoardController : MonoBehaviour {
 		if(playerIndex == playerList.Count){
 			playerIndex = 0;
 			lastMinigameIndex = Random.Range (0, minigames.Length);
+
+			foreach(GameObject player in playerList){
+				playerLocations [player.GetComponent<PieceController> ().playerID] = player.GetComponent<PieceController>().currentTile.transform.position;
+				playerLastLocations [player.GetComponent<PieceController> ().playerID] = player.GetComponent<PieceController>().lastTile.transform.position;
+			}
+
 			SceneManager.LoadScene (minigames [lastMinigameIndex]);
 		}
 	}
@@ -39,22 +47,59 @@ public class BoardController : MonoBehaviour {
 
 		playerList = new ArrayList ();
 
-		for(int i = 0; i<4; i++){
-			if (GlobalPlayerManager.playerGamepadID [i] != -1) {
-				GameObject player = (GameObject)Instantiate (piece, spawnTiles [i].transform.position, Quaternion.identity);
-				player.transform.SetParent (transform);
-				playerList.Add (player);
+		if (playerLocations == null) {
+			playerLocations = new Vector3[4];
+			playerLastLocations = new Vector3[4];
 
-				player.GetComponent<PieceController> ().playerID = i;
-				player.GetComponent<PieceController> ().currentTile = spawnTiles [i];
-				player.GetComponent<SpriteRenderer> ().sprite = playerSprites [i];
-				playerPictures [i].enabled = true;
-			} else {
-				playerPictures [i].enabled = false;
+			for (int i = 0; i < 4; i++) {
+				if (GlobalPlayerManager.playerGamepadID [i] != -1) {
+					GameObject player = (GameObject)Instantiate (piece, spawnTiles [i].transform.position, Quaternion.identity);
+					player.transform.SetParent (transform);
+					playerList.Add (player);
+
+					player.GetComponent<PieceController> ().playerID = i;
+					player.GetComponent<PieceController> ().currentTile = spawnTiles [i];
+					player.GetComponent<SpriteRenderer> ().sprite = playerSprites [i];
+					playerPictures [i].enabled = true;
+				} else {
+					playerPictures [i].enabled = false;
+				}
 			}
+
+		} else {
+			
+			for (int i = 0; i < 4; i++) {
+				if (GlobalPlayerManager.playerGamepadID [i] != -1) {
+					GameObject tile = findTileAtLocation (playerLocations [i], tiles);
+					GameObject lastTile = findTileAtLocation (playerLastLocations [i], tiles);
+
+					GameObject player = (GameObject)Instantiate (piece, playerLocations[i], Quaternion.identity);
+					player.transform.SetParent (transform);
+					playerList.Add (player);
+
+					player.GetComponent<PieceController> ().playerID = i;
+					player.GetComponent<PieceController> ().currentTile = tile;
+					player.GetComponent<PieceController> ().lastTile = lastTile;
+					player.GetComponent<SpriteRenderer> ().sprite = playerSprites [i];
+					playerPictures [i].enabled = true;
+				} else {
+					playerPictures [i].enabled = false;
+				}
+			}
+
 		}
 
 
+	}
+
+	private static GameObject findTileAtLocation(Vector3 location, GameObject[] tiles){
+		foreach (GameObject tile in tiles) {
+			if(tile.transform.position.Equals(location)){
+				return tile;
+			}
+		}
+		Debug.Log ("Uh-oh");
+		return null;
 	}
 
 	static GameObject getPlayer(){
