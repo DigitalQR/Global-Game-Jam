@@ -6,6 +6,7 @@ public class PieceController : MonoBehaviour {
 
 	public int playerID;
 	private int visualRoll = 0;
+	private TileAction currentExecutingTileAction;
 
 	public Text popupText;
 	public Image diceBackground;
@@ -31,6 +32,17 @@ public class PieceController : MonoBehaviour {
 	void FixedUpdate(){
 		if (cooldown != 0) {
 			cooldown--;
+		}
+
+		if(currentExecutingTileAction != null){
+			currentExecutingTileAction.updateTileAction ();
+
+			if(currentExecutingTileAction.finished){
+				currentExecutingTileAction = null;
+				BoardController.playerDone();
+			}
+
+			return;
 		}
 
 		if(playerID == BoardController.getCurrentPlayerID()){
@@ -91,6 +103,13 @@ public class PieceController : MonoBehaviour {
 							getNextTiles ();
 							visualRoll = roll;
 						} else {
+							TileAction action = currentTile.GetComponent<TileAction> ();
+							if(action != null){
+								action.runTileAction(this);
+								currentExecutingTileAction = action;
+								return;
+							}
+
 							BoardController.playerDone ();
 						}
 

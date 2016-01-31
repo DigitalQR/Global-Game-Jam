@@ -26,10 +26,30 @@ public class GamblingController : MonoBehaviour {
 		transform.position += new Vector3 (0, 600, 0);
 
 		Object[] allRuneObject = Resources.LoadAll("Object/Rune");
+		ArrayList level1 = new ArrayList ();
+
+		foreach (Object obj in allRuneObject) {
+			GameObject rune = (GameObject)obj;
+
+			if(rune.GetComponent<RuneData>().tier == 1){
+				level1.Add (rune);	
+			}
+		}
+
+		ArrayList level2 = new ArrayList ();
+
+		foreach (Object obj in allRuneObject) {
+			GameObject rune = (GameObject)obj;
+
+			if(rune.GetComponent<RuneData>().tier == 2){
+				level2.Add (rune);	
+			}
+		}
+		level1.Add (level2[Random.Range(0, level2.Count)] );
 
 		for (int i = 0; i < 4; i++) {
-			int ID = Random.Range (0, allRuneObject.Length - 1);
-			runeObject [i] = (GameObject) allRuneObject [ID];
+			int ID = Random.Range (0, level1.Count);
+			runeObject [i] = (GameObject) level1 [ID];
 			displayRune [i].sprite = runeObject [i].GetComponent<SpriteRenderer> ().sprite;
 		
 			displayPlayer[i].enabled = false;

@@ -6,7 +6,7 @@ using System.Collections;
 public class BoardController : MonoBehaviour {
 
 	private Vector3 cameraLocation = new Vector3(0,0,0);
-	public static string[] minigames = { "Lasers 1", "Lasers Sideways" , "CLEAN DA OCEAN"};
+	public static string[] minigames = { "Lasers 1", "Lasers Sideways" , "Sidescrolling", "Fireballs"};
 	private static int lastMinigameIndex = -1;
 
 	public Text currentPlayerText;
@@ -22,6 +22,7 @@ public class BoardController : MonoBehaviour {
 
 	public static void playerDone(){
 		playerIndex++;
+
 		if(playerIndex == playerList.Count){
 			playerIndex = 0;
 			lastMinigameIndex = Random.Range (0, minigames.Length);
@@ -38,6 +39,11 @@ public class BoardController : MonoBehaviour {
 
 	void Start () {
 		GameObject[] tiles = GameObject.FindGameObjectsWithTag ("Tile");
+
+		foreach (GameObject tile in tiles) {
+			tile.GetComponent<SpriteRenderer> ().enabled = false;
+		}
+
 		GameObject[] spawnTiles = { 
 			tiles[Random.Range(0,tiles.Length)],
 			tiles[Random.Range(0,tiles.Length)],
