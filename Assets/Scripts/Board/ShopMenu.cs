@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class ShopMenu : MonoBehaviour {
@@ -114,7 +115,7 @@ public class ShopMenu : MonoBehaviour {
 					   GlobalPlayerManager.playerPowerups [playerID, i1].GetComponent<RuneData> ().tier) {
 						instructionText.text = "THE RUNES MUST BE IN THE SAME TIER";
 					} else if(canExit){
-						instructionText.text = "I'll have those and you can have a...";
+						instructionText.text = "I'll have those and you can have a,,,";
 						canExit = false;
 						Invoke ("DisplayNewRune", 2);
 					}
@@ -164,7 +165,7 @@ public class ShopMenu : MonoBehaviour {
 		GlobalPlayerManager.playerPowerups [playerID, i1] = null;
 
 		if(newRune.GetComponent<RuneData>().tier == 4){
-			//Win
+			SceneManager.LoadScene("winningScene");
 		}
 		open = false;
 	}
