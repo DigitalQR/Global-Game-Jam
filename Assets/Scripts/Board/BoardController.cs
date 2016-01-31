@@ -6,7 +6,7 @@ using System.Collections;
 public class BoardController : MonoBehaviour {
 
 	private Vector3 cameraLocation = new Vector3(0,0,0);
-	public static string[] minigames = { "Lasers 1", "Lasers Sideways" };
+	public static string[] minigames = { "Lasers 1", "Lasers Sideways" , "CLEAN DA OCEAN"};
 	private static int lastMinigameIndex = -1;
 
 	public Text currentPlayerText;
