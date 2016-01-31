@@ -18,7 +18,7 @@ public class RuneMenuController : MonoBehaviour {
 
 	void Start(){
 		openLocation = transform.position.x;
-		closeLocation = openLocation + 273;
+		closeLocation = openLocation + 283;
 
 		transform.position = new Vector3(closeLocation, transform.position.y, 0);
 	}

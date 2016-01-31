@@ -9,7 +9,6 @@ public class Rubbish : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D other)
 	{
-		Debug.Log ("hit");
 		if (other.gameObject.tag.Equals ("Player")) {
 			int hitPlayerNumber = other.gameObject.GetComponent<RawPlayerController> ().playerNumber;			
 			minicontroller.GetComponent<Controller> ().BadTouch (hitPlayerNumber);
