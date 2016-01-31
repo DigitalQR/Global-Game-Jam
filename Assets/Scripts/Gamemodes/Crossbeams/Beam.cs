@@ -3,11 +3,11 @@ using System.Collections;
 
 public class Beam : MonoBehaviour {
 
-	BoxCollider2D collider;
+	BoxCollider2D boxCollider;
 
 	void Start () {
-		collider = GetComponent<BoxCollider2D>();	
-		collider.enabled = false;
+		boxCollider = GetComponent<BoxCollider2D>();	
+		boxCollider.enabled = false;
 		transform.localScale = new Vector3(transform.localScale.x, 0.05f, 1);
 		Invoke ("StartBeam", 1);
 	}
@@ -15,7 +15,7 @@ public class Beam : MonoBehaviour {
 
 	void StartBeam(){
 		transform.localScale = new Vector3(transform.localScale.x, 1, 1);
-		collider.enabled = true;
+		boxCollider.enabled = true;
 		Invoke ("DestroyBeam", 1);
 	}
 
