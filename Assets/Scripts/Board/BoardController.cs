@@ -128,10 +128,6 @@ public class BoardController : MonoBehaviour {
 		Camera.main.transform.position = Camera.main.transform.position * 0.8f + cameraLocation * 0.2f;
 	}
 
-	void OnLevelWasLoaded(int level){
-		SceneManager.UnloadScene (minigames [lastMinigameIndex]);
-	}
-
 	public static int getCurrentPlayerID(){
 		return getPlayer().GetComponent<PieceController>().playerID;
 	}

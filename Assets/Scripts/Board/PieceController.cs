@@ -9,6 +9,7 @@ public class PieceController : MonoBehaviour {
 
 	public Text popupText;
 	public Image diceBackground;
+	public RuneMenuController runeMenu;
 
 	public GameObject currentTile;
 	public GameObject lastTile;
@@ -28,66 +29,80 @@ public class PieceController : MonoBehaviour {
 	}
 
 	void FixedUpdate(){
+		if (cooldown != 0) {
+			cooldown--;
+		}
+
 		if(playerID == BoardController.getCurrentPlayerID()){
-			if(branch){
-				float xaxis = GlobalPlayerManager.GetAxis (playerID, "Horizontal");
-				float yaxis = GlobalPlayerManager.GetAxis (playerID, "Vertical");
 
-				if(upOption != null && yaxis > 0){
-					currentTile = upOption;
-					branch = false;
-					return;
-				}
-				if(downOption != null && yaxis < 0){
-					currentTile = downOption;
-					branch = false;
-					return;
-				}
-				if(leftOption != null && xaxis < 0){
-					currentTile = leftOption;
-					branch = false;
-					return;
-				}
-				if(rightOption != null && xaxis > 0){
-					currentTile = rightOption;
-					branch = false;
-					return;
-				}
-				return;
-			}
-
-			if(cooldown != 0){
-				cooldown--;
-			}
-
-			if(cooldown == 0 && GlobalPlayerManager.GetButton(playerID, "A")){
-				Roll();
-				visualRoll = roll;
+			if(roll == 0 && GlobalPlayerManager.GetButton(playerID, "Start") && cooldown == 0){
+				runeMenu.open = !runeMenu.open;
+				runeMenu.playerID = playerID;
 				cooldown = 7;
-			}else if(roll == 0){
-				popupText.text = "Press A to roll the dice";
-				diceBackground.enabled = false;
 			}
 
-			if(roll != 0){
-				popupText.text = "" + visualRoll;
-				diceBackground.enabled = true;
+			if (!runeMenu.open) {
 
-				if (moveFactor <= 0) {
-					moveFactor = 1;
-					roll--;
+				if (branch) {
+					float xaxis = GlobalPlayerManager.GetAxis (playerID, "Horizontal");
+					float yaxis = GlobalPlayerManager.GetAxis (playerID, "Vertical");
 
-					if (roll != 0) {
-						getNextTiles ();
-						visualRoll = roll;
-					} else {
-						BoardController.playerDone ();
+					if (upOption != null && yaxis > 0) {
+						currentTile = upOption;
+						branch = false;
+						return;
 					}
-
-				} else {
-					moveFactor -= 0.07f;
-					transform.position = lastTile.transform.position * (moveFactor) + currentTile.transform.position * (1f - moveFactor);
+					if (downOption != null && yaxis < 0) {
+						currentTile = downOption;
+						branch = false;
+						return;
+					}
+					if (leftOption != null && xaxis < 0) {
+						currentTile = leftOption;
+						branch = false;
+						return;
+					}
+					if (rightOption != null && xaxis > 0) {
+						currentTile = rightOption;
+						branch = false;
+						return;
+					}
+					return;
 				}
+
+				if (cooldown == 0 && GlobalPlayerManager.GetButton (playerID, "A")) {
+					Roll ();
+					visualRoll = roll;
+					cooldown = 7;
+				} else if (roll == 0) {
+					popupText.text = "Press A to roll the dice";
+					diceBackground.enabled = false;
+				}
+
+				if (roll != 0) {
+					popupText.text = "" + visualRoll;
+					diceBackground.enabled = true;
+
+					if (moveFactor <= 0) {
+						moveFactor = 1;
+						roll--;
+
+						if (roll != 0) {
+							getNextTiles ();
+							visualRoll = roll;
+						} else {
+							BoardController.playerDone ();
+						}
+
+					} else {
+						moveFactor -= 0.07f;
+						transform.position = lastTile.transform.position * (moveFactor) + currentTile.transform.position * (1f - moveFactor);
+					}
+				}
+
+			} else {
+				popupText.text = "";
+				diceBackground.enabled = false;
 			}
 		}
 	}
@@ -95,8 +110,6 @@ public class PieceController : MonoBehaviour {
 	void Roll(){
 		roll = Random.Range (1, 7);
 		moveFactor = 1;
-		Debug.Log (roll);
-
 		getNextTiles ();
 	}
 

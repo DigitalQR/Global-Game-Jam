@@ -19,8 +19,6 @@ public class SideOnMovement : MonoBehaviour {
 	void FixedUpdate () {
 		float y = body.velocity.y;
 
-		Debug.Log (onGround);
-
 		if(onGround && gamepad.isPressingA())
 		{
 			y = jumpHeight;
