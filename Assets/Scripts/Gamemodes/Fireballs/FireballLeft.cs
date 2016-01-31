@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Fireball : MonoBehaviour {
+public class FireballLeft : MonoBehaviour {
 
 	// Use this for initialization
 	void Update() {
