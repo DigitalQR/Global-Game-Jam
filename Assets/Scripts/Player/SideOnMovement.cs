@@ -33,8 +33,10 @@ public class SideOnMovement : MonoBehaviour {
 	}
 
 	void OnCollisionEnter2D(Collision2D collision){
-		if(collision.gameObject.transform.position.y + collision.collider.offset.y < transform.position.y){
-			onGround = true;
+		foreach(ContactPoint2D contact in collision.contacts){
+			if(contact.normal.Equals(Vector2.up)){
+				onGround = true;
+			}
 		}
 	}
 
