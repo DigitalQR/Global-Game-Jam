@@ -152,7 +152,6 @@ public class ShopMenu : MonoBehaviour {
 		newRuneImage.sprite = newRune.GetComponent<SpriteRenderer>().sprite;
 		newRuneImage.enabled = true;
 
-		Debug.Log ("Got to");
 		Invoke("ExitShop", 3);
 	}
 
@@ -164,7 +163,9 @@ public class ShopMenu : MonoBehaviour {
 		GlobalPlayerManager.playerPowerups [playerID, i0] = newRune;
 		GlobalPlayerManager.playerPowerups [playerID, i1] = null;
 
-		Debug.Log ("Got to1");
+		if(newRune.GetComponent<RuneData>().tier == 4){
+			//Win
+		}
 		open = false;
 	}
 
