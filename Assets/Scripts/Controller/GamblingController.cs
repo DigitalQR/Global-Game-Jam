@@ -65,7 +65,7 @@ public class GamblingController : MonoBehaviour {
 
 
 		if(currentPlayerIndex == playerOrder.Length){
-			transform.position = transform.position * 0.8f + new Vector3 (transform.position.x, -700, 0) * 0.2f;
+			transform.position = transform.position * 0.8f + new Vector3 (transform.position.x, -1000, 0) * 0.2f;
 			Invoke ("goToChoosing", 1);
 			return;
 		}
